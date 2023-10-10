@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.ex42.Fragment.MainActivityFragment;
 import com.example.ex42.OverWrite.ListViewActivity;
 import com.example.ex42.database.ShoppingDBHelper;
 import com.example.ex42.database.enity.User;
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity  {
                 }else {
                     String InputPassword = et_password.getText().toString();
                     if (InputPassword.equals(user.password)){
-                        Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
+                        Intent intent = new Intent(MainActivity.this, MainActivityFragment.class);
                         intent.putExtra("user", user);
                         startActivity(intent);
                     }else {

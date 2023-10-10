@@ -120,18 +120,13 @@ public class Game2_Enter extends AppCompatActivity implements MyViewPager.OnView
         btn_bottom_begin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_bottom_begin2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String buttonText = btn_bottom_begin2.getText().toString();
-                        if (buttonText.equals("请购买")) {
-                            Pay2(v);
-                        } else if (buttonText.equals("开始游玩")){
-                            Intent intent = new Intent(Game2_Enter.this, ElfkfMainActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                });
+                String buttonText = btn_bottom_begin2.getText().toString();
+                if (buttonText.equals("请购买")) {
+                    Pay2(v);
+                } else if (buttonText.equals("开始游玩")){
+                    Intent intent = new Intent(Game2_Enter.this, ElfkfMainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

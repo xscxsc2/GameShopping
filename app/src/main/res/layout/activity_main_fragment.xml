@@ -9,16 +9,17 @@
     >
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/main_vp"
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/main_bnv"
+        android:id="@+id/BottomBar"
         android:layout_width="match_parent"
-        android:layout_height="73dp"
+        android:layout_height="53dp"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu_test"
+        app:menu="@menu/bottom_menu_gamestore"
+        android:background="#DD39A5E1"
         />
 </LinearLayout>

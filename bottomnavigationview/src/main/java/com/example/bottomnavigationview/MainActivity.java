@@ -72,25 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.menu_service) {
                     viewPager.setCurrentItem(1);
                 }
-
-
-//                switch (item.getItemId()){
-//                    case R.id.menu_home:
-//                        viewPager.setCurrentItem(0);
-//                        break;
-//                    case R.id.menu_service:
-//                        viewPager.setCurrentItem(1);
-//                        break;
-//                    case R.id.menu_rich:
-//                        viewPager.setCurrentItem(2);
-//                        break;
-//                    case R.id.menu_news:
-//                        viewPager.setCurrentItem(3);
-//                        break;
-//                    case R.id.menu_mine:
-//                        viewPager.setCurrentItem(4);
-//                        break;
-//                }
                 return true;
             }
         });

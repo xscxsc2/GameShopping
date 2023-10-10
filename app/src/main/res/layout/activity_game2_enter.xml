@@ -17,13 +17,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp">
+        android:layout_height="200dp">
 
         <com.example.ex42.util.LunBo.MyViewPager
             android:id="@+id/looper_pager2"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="200dp" />
 
         <LinearLayout
             android:id="@+id/points_container2"
@@ -72,7 +71,7 @@
         android:layout_height="wrap_content"
         android:text="@string/elsfk"
         android:textSize="20dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/tab_weixin"
+        android:id="@+id/tab_news"
+        android:title="新闻资讯" />
+
+    <item
+        android:icon="@drawable/tab_find"
+        android:id="@+id/tab_games"
+        android:title="游戏" />
+
+    <item
+        android:icon="@drawable/tab_profile"
+        android:id="@+id/tab_myhome"
+        android:title="我" />
+
+
+</menu>
