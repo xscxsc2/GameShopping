@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity  {
     private TextView tv_NewUserRegister;
     private ShoppingDBHelper mDBHelper;
     private ActivityResultLauncher launcher;
+    private SharedPreferences mSharedPreferences ;
+    private static final String PREFS_NAME = "RememberMePrefs";
+    private static final String KEY_USERNAME = "et_Main_account";
+    private static final String KEY_PASSWORD = "et_password";
+
     private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +51,19 @@ public class MainActivity extends AppCompatActivity  {
         h1.hideStatusBar(this);
         setContentView(R.layout.activity_main);
 
+        initDBHelper();
         initView();
         initLisnter();
+        mSharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        // 检查是否存在保存的凭据
+        if (isRemembered()) {
+            // 自动填充用户名和密码
+            et_Main_account.setText(getSavedUsername());
+            et_password.setText(getSavedPassword());
+            // 执行自动登录操作
+            AutoLogin();
+        }
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -70,6 +87,18 @@ public class MainActivity extends AppCompatActivity  {
         });
     }
 
+    private void AutoLogin() {
+        Log.d(TAG, mSharedPreferences.getString(KEY_USERNAME, ""));
+        User user = mDBHelper.queryByAccount(mSharedPreferences.getString(KEY_USERNAME, ""));
+        Intent intent = new Intent(MainActivity.this, MainActivityFragment.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+    }
+
+    private boolean isRemembered() {
+        return mSharedPreferences.contains(KEY_USERNAME) && mSharedPreferences.contains(KEY_PASSWORD);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -79,7 +108,7 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onStart() {
         super.onStart();
-        initDBHelper();
+
     }
 
     private void initDBHelper() {
@@ -144,6 +173,7 @@ public class MainActivity extends AppCompatActivity  {
                 }else {
                     String InputPassword = et_password.getText().toString();
                     if (InputPassword.equals(user.password)){
+                        saveCredentials(et_Main_account.getText().toString(), et_password.getText().toString());
                         Intent intent = new Intent(MainActivity.this, MainActivityFragment.class);
                         intent.putExtra("user", user);
                         startActivity(intent);
@@ -158,6 +188,21 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         }).start();
+    }
+
+    private String getSavedUsername() {
+        return mSharedPreferences.getString(KEY_USERNAME, "");
+    }
+
+    private String getSavedPassword() {
+        return mSharedPreferences.getString(KEY_PASSWORD, "");
+    }
+
+    private void saveCredentials(String et_Main_account, String et_password) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString(KEY_USERNAME, et_Main_account);
+        editor.putString(KEY_PASSWORD, et_password);
+        editor.apply();
     }
 
     private void initView() {
